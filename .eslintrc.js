@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['airbnb-base', 'plugin:solid/recommended'],
+  extends: ['airbnb-base', 'plugin:solid/recommended', 'prettier'],
   plugins: ['solid'],
   overrides: [],
   parserOptions: {
@@ -15,5 +15,6 @@ module.exports = {
       'error',
       { devDependencies: ['**/*.test.js', '**/*.spec.js', '*.config.js'] },
     ],
+    'no-confusing-arrow': 'off',
   },
 };

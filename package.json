@@ -7,14 +7,17 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "scrape": "python scrape/scape.py src/assets/data.json"
+    "scrape": "python scrape/scape.py src/assets/data.json",
+    "format": "prettier --write src/"
   },
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.42.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-solid": "^0.12.1",
+    "prettier": "^2.8.8",
     "vite": "^4.1.1",
     "vite-plugin-solid": "^2.5.0"
   },

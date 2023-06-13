@@ -1,0 +1,59 @@
+@font-face {
+  font-family: EuroPlate;
+  src: url('../assets/EuroPlate.ttf');
+}
+
+.plate {
+  background-color: blue;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.1em;
+  font-size: 128px;
+  font-family: EuroPlate;
+  height: 1em;
+  border: 0.03em solid black;
+  box-shadow: 0 0 0 0.02em white;
+  overflow: hidden;
+}
+
+.letter-container {
+  padding: 0.02em;
+  background-color: white;
+  z-index: 0;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prefix {
+  background-color: blue;
+  width: 0.5em;
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 0.1em 0 0 0.1em;
+}
+
+.stars {
+  height: 0.4em;
+  width: 0.4em;
+}
+
+.country {
+  font-size: 32px;
+  font-family: Arial, Helvetica, sans-serif;
+  /* font-weight: bold; */
+  color: white;
+}
+
+.city {
+  margin-right: 0.2em;
+}
+
+.middle {
+  margin-right: 0.1em;
+}
