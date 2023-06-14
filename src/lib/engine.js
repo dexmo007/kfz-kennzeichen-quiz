@@ -1,4 +1,4 @@
-import data from '../assets/data.json';
+import allLicensePlates from '../assets/data.json';
 import * as rng from './rng';
 
 const templates = {
@@ -48,9 +48,11 @@ const distribution = Object.entries(templates)
     [],
   );
 
+const licensePlates = allLicensePlates.filter(({ abbr }) => abbr.length === 2);
+
 // eslint-disable-next-line import/prefer-default-export
 export function getRandomLicensePlate() {
-  const city = data[Math.floor(Math.random() * data.length)];
+  const city = licensePlates[Math.floor(Math.random() * licensePlates.length)];
   const roll = Math.random();
   const [, templateKey] = distribution.find(([d]) => roll < d);
   const [middle, end] = generateFromTemplate(templateKey);

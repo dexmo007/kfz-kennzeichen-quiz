@@ -16,5 +16,6 @@ module.exports = {
       { devDependencies: ['**/*.test.js', '**/*.spec.js', '*.config.js'] },
     ],
     'no-confusing-arrow': 'off',
+    'no-continue': 'off',
   },
 };

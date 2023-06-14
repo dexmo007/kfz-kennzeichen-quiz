@@ -3,7 +3,7 @@ import EuroStars from '../assets/European_stars.svg';
 
 export default function LicensePlate(props) {
   return (
-    <div class={styles.plate}>
+    <div classList={{ [styles.plate]: true, [props.class]: !!props.class }}>
       <div class={styles.prefix}>
         <img class={styles.stars} src={EuroStars} alt="euro stars" />
         <span class={styles.country}>D</span>
