@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js';
+import { createSignal, Show } from 'solid-js';
 import styles from './App.module.css';
 import { getRandomLicensePlate } from './lib/engine';
 import * as rng from './lib/rng';
@@ -30,6 +30,8 @@ function randomChar(old) {
 }
 
 function App() {
+  const [oldLicensePlate, setOldLicensePlate] = createSignal(null);
+  const [newLicensePlate, setNewLicensePlate] = createSignal(null);
   const [licensePlate, setLicensePlate] = createSignal(getRandomLicensePlate());
   let queue = [];
   let frameRequest;
@@ -48,7 +50,7 @@ function App() {
       }
       if (frame >= start) {
         if (!char || Math.random() < 0.28) {
-          char = randomChar(char || charAt(licensePlate(), i));
+          char = randomChar(char || to || from);
           queue[i].char = char;
         }
         output += char;
@@ -58,9 +60,14 @@ function App() {
     }
 
     setLicensePlate({
-      city: { abbr: output.slice(0, 2) },
-      middle: output.slice(2, 4),
-      end: output.slice(4),
+      city: { abbr: output.slice(0, newLicensePlate().city.abbr.length) },
+      middle: output.slice(
+        newLicensePlate().city.abbr.length,
+        newLicensePlate().city.abbr.length + newLicensePlate().middle.length,
+      ),
+      end: output.slice(
+        newLicensePlate().city.abbr.length + newLicensePlate().middle.length,
+      ),
     });
     if (complete === queue.length) {
       animationResolve();
@@ -71,7 +78,9 @@ function App() {
   }
   const nextPlate = () => {
     const oldPlate = licensePlate();
+    setOldLicensePlate(oldPlate);
     const newPlate = getRandomLicensePlate();
+    setNewLicensePlate(newPlate);
     const length = Math.max(getPlateLength(oldPlate), getPlateLength(newPlate));
     queue = [];
     for (let i = 0; i < length; i += 1) {
@@ -80,10 +89,12 @@ function App() {
       queue.push({
         from: charAt(oldPlate, i) || '',
         to: charAt(newPlate, i) || '',
+
         start,
         end,
       });
     }
+    console.log(queue);
     cancelAnimationFrame(frameRequest);
     frame = 0;
     update();
@@ -94,7 +105,17 @@ function App() {
 
   return (
     <div class={styles.App}>
+      <Show when={oldLicensePlate()}>
+        <LicensePlate {...oldLicensePlate()} />
+      </Show>
       <LicensePlate {...licensePlate()} />
+      <Show when={newLicensePlate()}>
+        <pre style={{ color: 'white' }}>
+          {Object.values(newLicensePlate())
+            .map((e) => e.abbr || e)
+            .join(' ')}
+        </pre>
+      </Show>
       <button onClick={() => nextPlate().then(() => console.log('Resolved'))}>
         Generate new
       </button>

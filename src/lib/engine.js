@@ -48,7 +48,7 @@ const distribution = Object.entries(templates)
     [],
   );
 
-const licensePlates = allLicensePlates.filter(({ abbr }) => abbr.length === 2);
+const licensePlates = allLicensePlates; // .filter(({ abbr }) => abbr.length === 2);
 
 // eslint-disable-next-line import/prefer-default-export
 export function getRandomLicensePlate() {
