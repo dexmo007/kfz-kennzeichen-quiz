@@ -30,8 +30,6 @@ function randomChar(old) {
 }
 
 function App() {
-  const [oldLicensePlate, setOldLicensePlate] = createSignal(null);
-  const [newLicensePlate, setNewLicensePlate] = createSignal(null);
   const [licensePlate, setLicensePlate] = createSignal(getRandomLicensePlate());
   let queue = [];
   let frameRequest;
@@ -94,7 +92,6 @@ function App() {
         end,
       });
     }
-    console.log(queue);
     cancelAnimationFrame(frameRequest);
     frame = 0;
     update();
@@ -105,17 +102,8 @@ function App() {
 
   return (
     <div class={styles.App}>
-      <Show when={oldLicensePlate()}>
-        <LicensePlate {...oldLicensePlate()} />
-      </Show>
       <LicensePlate {...licensePlate()} />
-      <Show when={newLicensePlate()}>
-        <pre style={{ color: 'white' }}>
-          {Object.values(newLicensePlate())
-            .map((e) => e.abbr || e)
-            .join(' ')}
-        </pre>
-      </Show>
+
       <button onClick={() => nextPlate().then(() => console.log('Resolved'))}>
         Generate new
       </button>
